@@ -1,3 +1,6 @@
+session-2/data/
+session-3/cars_vs_flowers/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

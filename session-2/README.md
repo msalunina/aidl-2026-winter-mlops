@@ -16,7 +16,7 @@ conda activate aidl-session2
 ```
 and install the dependencies
 ```bash
-pip install -r requirements.txt
+pip install -r session-2/requirements.txt
 ```
 
 **Note:** it is important to create a new conda environment, and not re-use previous ones from other sessions.
