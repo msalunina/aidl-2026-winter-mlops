@@ -82,8 +82,8 @@ class YelpReviewPolarityDatasetLoader:
                         labels.append(label - 1)  # Convert to 0/1
                 return texts, labels
 
-        self.train_texts, self.train_labels = read_data('yelp_review_polarity_csv/train.csv')
-        self.test_texts, self.test_labels = read_data('yelp_review_polarity_csv/test.csv')
+        self.train_texts, self.train_labels = read_data('./session-4/yelp_review_polarity_csv/train.csv')
+        self.test_texts, self.test_labels = read_data('./session-4/yelp_review_polarity_csv/test.csv')
     
     def get_vocab_size(self):
         return len(self.vocab)

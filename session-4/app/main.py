@@ -33,7 +33,12 @@ def _load_model():
     VOCAB_WORD2IDX = checkpoint["vocab_word2idx"]
     # TODO load the model. You can get `embed_dim` and `num_class` from the checkpoint. 
     # TODO Then, load the state dict of the model
-    MODEL = ...
+    MODEL = SentimentAnalysis(
+        vocab_size=len(VOCAB_WORD2IDX),
+        embed_dim=checkpoint["embed_dim"],
+        num_class=checkpoint["num_class"]
+    ).to(torch.device("cpu"))
+    MODEL.load_state_dict(checkpoint["model_state_dict"])
 
     NGRAMS = checkpoint["ngrams"]
 

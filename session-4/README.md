@@ -13,7 +13,7 @@ The dataset has two labels. "1" corresponds to negative reviews, and "2" to posi
 ### With Conda
 Create a conda environment by running
 ```
-conda create --name aidl-session4 python>=3.9
+conda create --name aidl-session4 python=3.10
 ```
 Then, activate the environment
 ```

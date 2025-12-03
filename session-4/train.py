@@ -18,6 +18,11 @@ def train(dataloader):
     for text, offsets, label in dataloader:
         # START TODO: 
         # TODO complete the training code. The inputs of the model are text and offsets
+        optimizer.zero_grad()
+        output = model(text, offsets)
+        loss = criterion(output, label)
+        loss.backward()
+        optimizer.step()
 
         train_loss += loss.item() * len(output)
         train_acc += (output.argmax(1) == label).sum().item()
@@ -35,7 +40,9 @@ def test(dataloader: DataLoader):
     acc = 0
     # TODO complete the evaluation code. The inputs of the model are text and offsets
     for text, offsets, label in dataloader:
-        ...
+        with torch.no_grad():
+            output = model(text, offsets)
+            loss_val = criterion(output, label)
 
         loss += loss_val.item() * len(output)
         acc += (output.argmax(1) == label).sum().item()
@@ -77,7 +84,10 @@ if __name__ == "__main__":
     # Split train and val datasets
     # TODO split `train_val_dataset` in `train_dataset` and `valid_dataset`. The size of train dataset should be 95%
 
-    train_dataset, valid_dataset = ...
+    train_dataset, valid_dataset = random_split(
+        train_val_dataset,
+        [int(0.95 * len(train_val_dataset)), len(train_val_dataset) - int(0.95 * len(train_val_dataset))]
+    )
     
     # DataLoader needs an special function to generate the batches. 
     # Since we will have inputs of varying size, we will concatenate 
@@ -108,7 +118,7 @@ if __name__ == "__main__":
     print(f'\tLoss: {test_loss:.4f}(test)\t|\tAcc: {test_acc * 100:.1f}%(test)')
 
     # Now save the artifacts of the training
-    savedir = "app/state_dict.pt"
+    savedir = "./session-4/app/state_dict.pt"
     print(f"Saving checkpoint to {savedir}...")
     checkpoint = {
         "model_state_dict": model.cpu().state_dict(),
